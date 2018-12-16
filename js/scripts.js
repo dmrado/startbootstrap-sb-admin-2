@@ -6,7 +6,7 @@ var saved = []; //массив для хранения красных (прод�
 //создаем таблицу и сразу стилизуем с помощью js
 var table = document.createElement('table');//создали элемент табица
 // задаем id для таблицы
-table.setAttribute('id', 'tbl');
+table.setAttribute('id', 'dataTables-example');
 //задаем css-стили для таблицы
 table.style.borderCollapse = 'collapse';
 table.style.borderSpacing = '0';
@@ -15,14 +15,17 @@ table.style.margin = '20px 0';
 //table.style.cssText = 'border-collapse:collapse; border-spacing: 0; margin: 20px 0';
 //выводим таблицу в id="wrapper"
 document.getElementById('page-wrapper').appendChild(table);//table без кавычек потому что значит передаем переменную
+
+var tbody = document.createElement('tbody');
+table.appendChild(tbody);
 //в цикле формируем таблицу (объемную матрицу) размером trCount * tdCount, цикл вложенный
 for(var i = 1; i<=trCount; i++){//формируем ряды: создаем ряд и добавляем его в таблицу, ряд это переменная tr
     var tr = document.createElement('tr');
-    table.appendChild(tr);//наверху 12 рядов указано в переменной trCount
+    tbody.appendChild(tr);//наверху 12 рядов указано в переменной trCount
     //создаем ячейку (строка)
-    var td = document.createElement('td');
-    td.innerHTML = i; //ставим нумерацию, добавляя текущее значение i
-    table.appendChild(td);
+    //var td = document.createElement('td');
+    //td.innerHTML = i; //ставим нумерацию, добавляя текущее значение i
+    //table.appendChild(td);
     for(var j = 1; j<=tdCount; j++){//в каждом ряду формируем столбец
         //создаем ячейку (колонка)
         td = document.createElement('td');
