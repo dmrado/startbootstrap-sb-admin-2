@@ -278,7 +278,7 @@
                     </li>
 
                     <li>
-                        <a href="table-example.html"><i class="fa fa-dashboard fa-fw"></i> Пример таблицы</a>
+                        <a href="table-example.html"><i class="fa fa-dashboard fa-fw"></i> Пример таблицы и графика</a>
                     </li>
                     <li>
                         <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
@@ -293,7 +293,7 @@
                                 <a href="morris.html">Morris.js Charts</a>
                             </li>
                             <li>
-                                <a href="chart-example.html">Мой график</a>
+                                <a href="table-example.html">Мой график с таблицей</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -399,62 +399,29 @@
 <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
 <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
 <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
-<script src="../js/scripts.js"></script>
+<!--<script src="../js/scripts.js"></script>-->
 
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
 
 
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+
+
+<div id="piechart" style="width: 1200px; height: 800px; position: relative"></div>
 <script>
-    $(document).ready(function() {
-        var content = `
-<thead>\
-    <tr>\
-        <th>1</th>\
-        <th>2</th>\
-        <th>3</th>\
-        <th>4</th>\
-        <th>5</th>\
-        <th>6</th>\
-        <th>7</th>\
-        <th>8</th>\
-        <th>9</th>\
-        <th>10</th>\
-        <th>11</th>\
-        <th>12</th>\
-        <th>13</th>\
-        <th>14</th>\
-        <th>15</th>\
-        <th>16</th>\
-        <th>17</th>\
-        <th>18</th>\
-    </tr>\
-</thead>`;
+    var pieChart = document.getElementById('piechart');
+</script>
+<script>
 
-        $('#dataTables-example')
-            .addClass('table')
-            .addClass('table-striped')
-            .addClass('table-bordered')
-            .addClass('table-hover')
-            .append(content);
+    /*  var airChart = document.createElement('');
+      airChart.setAttribute('id', 'air');
+      airChart.style.cssText = 'width: 500px; height: 400px'
+      */ document.getElementById('page-wrapper').appendChild(pieChart);
 
-        $('#dataTables-example').DataTable({
-            responsive: true
-        });
-    });
 </script>
 
-<!--<div id="piechart" style="width: 700px; height: 500px; position: relative"></div>-->
-
-<!--<script>
-
-  /*  var airChart = document.createElement('');
-    airChart.setAttribute('id', 'air');
-    airChart.style.cssText = 'width: 500px; height: 400px'
-    document.getElementById('wrapper').appendChild(airChart);
-*/
-
+<script>
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
 
@@ -477,7 +444,7 @@
 
         chart.draw(data, options);
     }
-</script>-->
+</script>
 
 </body>
 </html>

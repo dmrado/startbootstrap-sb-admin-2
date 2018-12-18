@@ -11,10 +11,8 @@ table.setAttribute('id', 'dataTables-example');
 table.style.borderCollapse = 'collapse';
 table.style.borderSpacing = '0';
 table.style.margin = '20px 0';
-//или то же самое делаем одной командой:
-//table.style.cssText = 'border-collapse:collapse; border-spacing: 0; margin: 20px 0';
-//выводим таблицу в id="wrapper"
-document.getElementById('page-wrapper').appendChild(table);//table без кавычек потому что значит передаем переменную
+
+document.getElementById('page-wrapper').appendChild(table);
 
 var tbody = document.createElement('tbody');
 table.appendChild(tbody);
