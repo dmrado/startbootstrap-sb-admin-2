@@ -411,24 +411,10 @@
         var content = `
 <thead>\
     <tr>\
+        <th>0</th>\
         <th>1</th>\
-        <th>2</th>\
-        <th>3</th>\
-        <th>4</th>\
-        <th>5</th>\
-        <th>6</th>\
-        <th>7</th>\
-        <th>8</th>\
-        <th>9</th>\
-        <th>10</th>\
-        <th>11</th>\
-        <th>12</th>\
-        <th>13</th>\
-        <th>14</th>\
-        <th>15</th>\
-        <th>16</th>\
-        <th>17</th>\
-        <th>18</th>\
+        <th>typeid</th>\
+        <th>exptype</th>\
     </tr>\
 </thead>`;
 
@@ -446,10 +432,20 @@
             url: "http://localhost:8888/startbootstrap-sb-admin-2/table-example.php",
             method: "GET",
             success: function(data){
-            //   console.log(data);
-
-               var answer = JSON.parse(data);
+                //   console.log(data);
+                var answer = JSON.parse(data);
                 console.log(answer);
+                if (answer && answer.result) {
+                    answer.result.map(function(el) {
+                        // 0: {0: "1", 1: "Продукты для дома", typeid: "1", exptype: "Продукты для дома"
+                        t.row.add( [
+                            el[0],
+                            el[1],
+                            el['typeid'],
+                            el['exptype']
+                        ] ).draw( false );
+                    });
+                }
             }//end success
         });//end ajax
 
@@ -461,7 +457,7 @@
                 counter +'.2',
                 counter +'.3',
                 counter +'.4',
-                counter +'.5'
+                //counter +'.5'
             ] ).draw( false );
 
             counter++;
