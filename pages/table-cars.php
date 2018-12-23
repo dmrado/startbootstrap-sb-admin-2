@@ -2,56 +2,42 @@
 require_once ("../lib/header.php");
 ?>
 <div id="page-wrapper">
+    <?php if($_REQUEST['type'] && ($_REQUEST['type'] == 'carbrands')): ?>
+        <div id="data">carbrands</div>
+    <?php else: ?>
+        <div id="data">carmods</div>
+    <?php endif; ?>
     <input type="button" class="btn btn-default" id="addRow" value="Добавить строку">
 </div>
 <?php
 require_once ("../lib/scripts.php");
 ?>
+<script src="/js/dynamic-table.js"></script>
     <script>
         $(document).ready(function(){
+            var mode = document.getElementById('data').innerText;
+            alert(mode);
             var tableName = 'carbrands';
-            var columns = [{id: 'carbrand_id', name: 'ID'}, {id: 'carbrand_name', name: 'BRAND'}];
-            var table = document.createElement('table');
-            table.setAttribute('id', 'table-'+ tableName);
-            table.setAttribute('class', 'table table-striped table-bordered');
-
-            document.getElementById('page-wrapper').appendChild(table);
-            var tHead = document.createElement('thead');
-            var row = document.createElement('tr');
-            tHead.appendChild(row);
-
-            table.appendChild(tHead);
-            var tBody = document.createElement('tbody');
-            table.appendChild(tBody);
-
-            for (var i = 0; i < columns.length; i++){
-                var th = document.createElement('th');
-                th.innerText = columns[i].name;
-                row.appendChild(th);
-            }
-            document.getElementById('page-wrapper').appendChild(table);
-
-            var t = $('#table-'+ tableName).DataTable({
-                responsive: true
-            });
-
-            $.ajax({
-                url: "http://localhost:8888/php-crud-api/api.php/records/"+tableName,
-                method: "GET",
-                success: function(answer){
-                    //  console.log(data);
-                    if (answer && answer.records) {
-                        answer.records.map(function(el) {
-
-                            t.row.add( [
-                                el['carbrand_id'],
-                                el['carbrand_name'],
-                            ] ).draw( false );
-                        });
-                    }
-                }//end success
-            });//end ajax
-
+            var columns = [{
+                id: 'carbrand_id',
+                name: 'ID'
+            },
+            {
+                id: 'carbrand_name',
+                name: 'BRAND'
+            }];
+            // var tableName = 'carmods';
+            // var columns = [{
+            //     id: 'carmod_id',
+            //     name: 'ID'
+            // },{
+            //     id: 'carbrand_id',
+            //     name: 'Brand id'
+            // },{
+            //     id: 'carmod_name',
+            //     name: 'Название модели'
+            // }];
+            createDynamicTable(tableName, columns, 'page-wrapper');
         });//end ready
     </script>
 
