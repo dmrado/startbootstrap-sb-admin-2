@@ -3,7 +3,7 @@ function createDynamicTable(tableName, columns, pageWrapperId) {
   table.setAttribute('id', 'table-'+ tableName);
   table.setAttribute('class', 'table table-striped table-bordered');
 
-  document.getElementById(pageWrapperId).appendChild(table);
+
   var tHead = document.createElement('thead');
   var row = document.createElement('tr');
   tHead.appendChild(row);
@@ -17,6 +17,9 @@ function createDynamicTable(tableName, columns, pageWrapperId) {
       th.innerText = columns[i].name;
       row.appendChild(th);
   }
+    var th = document.createElement('th');
+    th.innerText = 'operations';//название третьей колонки в текстовом виде
+    row.appendChild(th);
   document.getElementById(pageWrapperId).appendChild(table);
 
   var t = $('#table-'+ tableName).DataTable({
@@ -30,12 +33,13 @@ function createDynamicTable(tableName, columns, pageWrapperId) {
       method: "GET",
       success: function(answer){
           if (answer && answer.records) {
-              answer.records.map(function(el) {
-                  var row = [];
+              answer.records.map(function(el) {//это строчка из БД - единица данных, превращенная в объект. Результат выполнения анонимной функции с аргументом el прибалятся к каждому элементу массива answer
+                  var row = [];//массив ячеек, которые нужны для строки в ней данные из ответа ajax
                   for (var i = 0; i < columns.length; i++){
-                      row.push(el[columns[i].id])
+                      row.push(el[columns[i].id])//в columns у нас поля, писанные в элементе
                   }
-                  t.row.add(row).draw( false );
+                  row.push('<a href="'+tableName+'_view.php?id='+ el[columns[0].id] +'">Просмотр</a>');// так как самый первый элемент - это примари кей carbrand_id для этой таблицы
+                  t.row.add(row).draw( false );//передаем массив ячеек получаемые по url
               });
           }
       }//end success
